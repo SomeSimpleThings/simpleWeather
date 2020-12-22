@@ -11,4 +11,15 @@
     <string name="friday">Пятница</string>
     <string name="saturday">Суббота</string>
     <string name="sunday">Воскресенье</string>
+    <string name="settings">Настройки</string>
+    <string name="favourites">Избранное</string>
+    <string name="search">Найти</string>
+    <string name="appearence">Appearance</string>
+    <string name="prefs_switch_dark_summary">Включить темную тему</string>
+    <string name="prefs_switch_dark_title">Темная тема</string>
+    <string name="pref_about">О приложении</string>
+    <string name="prefs_developer_title">Разработчик</string>
+    <string name="prefs_version_title">Версия</string>
+    <string name="favourite">Избранное</string>
+    <string name="country_default">Страна</string>
 </resources>
