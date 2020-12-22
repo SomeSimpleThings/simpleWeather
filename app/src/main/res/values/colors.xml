@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#77B8A9</color>
+    <color name="background">#148C9C</color>
+    <color name="backgroundRecycler">#2196F3</color>
+    <color name="backgroundStroke">#B1BCBE</color>
     <color name="colorPrimary">#00bcd4</color>
     <color name="colorPrimaryDark">#008ba3</color>
     <color name="colorAccent">#FFC107</color>
