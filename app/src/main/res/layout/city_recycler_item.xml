@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recycler_cities"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_rounded_recycler"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_city_recycler_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/city_default"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_country_recycler_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/country_default"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_current_temp_recycler_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/temp_default"
+        android:textSize="20sp" />
+</LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#148C9C</color>
-    <color name="backgroundRecycler">#2196F3</color>
+    <color name="backgroundRecycler">#FFFFFF</color>
     <color name="backgroundStroke">#B1BCBE</color>
     <color name="colorPrimary">#00bcd4</color>
     <color name="colorPrimaryDark">#008ba3</color>

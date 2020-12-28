@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/favourites_menu_drawer"
+            android:title="@string/favourites" />
+
+        <item
+            android:id="@+id/search_menu_drawer"
+            android:title="@string/search" />
+    </group>
+</menu>
