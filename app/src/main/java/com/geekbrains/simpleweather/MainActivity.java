@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "tagg";
     ArrayList<String> days = new ArrayList<>();
     BottomDrawerFragment bottomDrawerFragment;
-
-
 
 
     @Override
@@ -47,12 +46,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            bottomDrawerFragment = new BottomDrawerFragment();
-            bottomDrawerFragment.show(getSupportFragmentManager(), TAG);
-            return true;
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                bottomDrawerFragment = new BottomDrawerFragment();
+                bottomDrawerFragment.show(getSupportFragmentManager(), TAG);
+                return true;
+            case R.id.settings_menu_drawer:
+                Intent settingsIntent = new Intent(this,
+                        SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
-        return super.onOptionsItemSelected(item);
+
     }
 
     private void populateDaysList() {
