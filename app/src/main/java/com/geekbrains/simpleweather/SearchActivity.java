@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import timber.log.Timber;
+
+import static com.geekbrains.simpleweather.MainActivity.CITY_KEY;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -30,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
         cities.addAll(InstantSaverImplementation.getInstance().getSavedList("cities"));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview_cities);
-        adapter = new SearchCitiesAdapter(this, cities);
+        adapter = new SearchCitiesAdapter(this, cities, this::onItemClicked);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         setupButton();
@@ -83,5 +86,12 @@ public class SearchActivity extends AppCompatActivity {
             cities.add(text);
             adapter.notifyDataSetChanged();
         });
+    }
+
+    public void onItemClicked(String city) {
+        Intent intent = new Intent();
+        intent.putExtra(CITY_KEY, city);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

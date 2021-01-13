@@ -1,15 +1,18 @@
 package com.geekbrains.simpleweather;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 
@@ -17,10 +20,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int REQ_CODE_SELECT_CITY = 42;
     private static final String TAG = "tagg";
+    public static final String CITY_KEY = "selected_city_key";
     ArrayList<String> days = new ArrayList<>();
     BottomDrawerFragment bottomDrawerFragment;
-
+    TextView currentCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         BottomAppBar bar = findViewById(R.id.bottomAppBar);
         setSupportActionBar(bar);
+
+        currentCity = findViewById(R.id.tv_city);
     }
 
     @Override
@@ -49,19 +56,49 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                bottomDrawerFragment = new BottomDrawerFragment();
-                bottomDrawerFragment.show(getSupportFragmentManager(), TAG);
+                showBottomDrawer();
                 return true;
             case R.id.settings_menu_drawer:
-                Intent settingsIntent = new Intent(this,
-                        SettingsActivity.class);
-                startActivity(settingsIntent);
+                showSettingsActivity();
+                return true;
+            case R.id.info_menu_drawer:
+                openCityInfo();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
 
+    }
+
+    private void openCityInfo() {
+        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+        intent.putExtra(SearchManager.QUERY, currentCity.getText());
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    private void showSettingsActivity() {
+        Intent settingsIntent = new Intent(this,
+                SettingsActivity.class);
+        startActivity(settingsIntent);
+    }
+
+    private void showBottomDrawer() {
+        bottomDrawerFragment = new BottomDrawerFragment();
+        bottomDrawerFragment.show(getSupportFragmentManager(), TAG);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (REQ_CODE_SELECT_CITY == requestCode
+                && resultCode == RESULT_OK
+                && data != null) {
+            String selectedCity = data.getStringExtra(CITY_KEY);
+            currentCity.setText(selectedCity);
+            bottomDrawerFragment.dismiss();
+        }
     }
 
     private void populateDaysList() {
@@ -72,5 +109,10 @@ public class MainActivity extends AppCompatActivity {
         days.add(getString(R.string.friday));
         days.add(getString(R.string.saturday));
         days.add(getString(R.string.sunday));
+    }
+
+    public void startSearchActivity() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivityForResult(intent, REQ_CODE_SELECT_CITY);
     }
 }

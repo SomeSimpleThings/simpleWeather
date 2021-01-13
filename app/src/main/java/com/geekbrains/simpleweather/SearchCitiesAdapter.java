@@ -15,10 +15,12 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
 
     private final LayoutInflater inflater;
     private final List<String> cities;
+    private final OnItemClickListener itemClickListener;
 
-    SearchCitiesAdapter(Context context, List<String> cities) {
+    SearchCitiesAdapter(Context context, List<String> cities, OnItemClickListener listener) {
         this.cities = cities;
         this.inflater = LayoutInflater.from(context);
+        this.itemClickListener = listener;
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String city = cities.get(position);
-        holder.city.setText(city);
+        holder.bind(city, itemClickListener);
     }
 
     @Override
@@ -41,11 +43,20 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView city;
+        TextView cityView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            city = itemView.findViewById(R.id.tv_city_recycler_item);
+            cityView = itemView.findViewById(R.id.tv_city_recycler_item);
         }
+
+        public void bind(String city, OnItemClickListener itemClickListener) {
+            cityView.setText(city);
+            itemView.setOnClickListener(v -> itemClickListener.onItemClicked(city));
+        }
+    }
+
+    interface OnItemClickListener {
+        void onItemClicked(String city);
     }
 }
