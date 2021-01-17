@@ -27,11 +27,13 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        processNavigation(view.findViewById(R.id.navigation_view));
+        view.findViewById(R.id.image_close_drawer).setOnClickListener(v -> this.dismiss());
+    }
 
-        NavigationView drawerNavigation = getView().findViewById(R.id.navigation_view);
-
+    private void processNavigation(NavigationView drawerNavigation) {
         drawerNavigation.setNavigationItemSelectedListener(menuItem -> {
             if (menuItem.getItemId() == R.id.search_menu_drawer) {
                 Activity activity = getActivity();
