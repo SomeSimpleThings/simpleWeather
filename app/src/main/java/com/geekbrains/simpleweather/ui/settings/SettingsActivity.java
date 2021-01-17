@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather;
+package com.geekbrains.simpleweather.ui.settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
+
+import com.geekbrains.simpleweather.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

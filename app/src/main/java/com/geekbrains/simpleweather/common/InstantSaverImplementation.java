@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather;
+package com.geekbrains.simpleweather.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;

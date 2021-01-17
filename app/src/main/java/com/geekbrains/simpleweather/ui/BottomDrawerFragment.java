@@ -1,7 +1,6 @@
-package com.geekbrains.simpleweather;
+package com.geekbrains.simpleweather.ui;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.geekbrains.simpleweather.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import static com.geekbrains.simpleweather.MainActivity.REQ_CODE_SELECT_CITY;
 
 public class BottomDrawerFragment extends BottomSheetDialogFragment {
 

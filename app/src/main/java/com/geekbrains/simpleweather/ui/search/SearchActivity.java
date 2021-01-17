@@ -1,8 +1,4 @@
-package com.geekbrains.simpleweather;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.geekbrains.simpleweather.ui.search;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +6,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.geekbrains.simpleweather.R;
+import com.geekbrains.simpleweather.common.InstantSaverImplementation;
+
 import java.util.ArrayList;
 
 import timber.log.Timber;
 
-import static com.geekbrains.simpleweather.MainActivity.CITY_KEY;
+import static com.geekbrains.simpleweather.ui.MainActivity.CITY_KEY;
 
 public class SearchActivity extends AppCompatActivity {
 

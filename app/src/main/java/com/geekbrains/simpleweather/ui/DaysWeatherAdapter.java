@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather;
+package com.geekbrains.simpleweather.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.geekbrains.simpleweather.R;
+
 import java.util.List;
 
 public class DaysWeatherAdapter extends RecyclerView.Adapter<DaysWeatherAdapter.ViewHolder> {
@@ -16,7 +18,7 @@ public class DaysWeatherAdapter extends RecyclerView.Adapter<DaysWeatherAdapter.
     private final LayoutInflater inflater;
     private final List<String> days;
 
-    DaysWeatherAdapter(Context context, List<String> days) {
+    public DaysWeatherAdapter(Context context, List<String> days) {
         this.days = days;
         this.inflater = LayoutInflater.from(context);
     }

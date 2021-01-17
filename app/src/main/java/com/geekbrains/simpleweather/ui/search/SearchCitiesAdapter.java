@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather;
+package com.geekbrains.simpleweather.ui.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.geekbrains.simpleweather.R;
 
 import java.util.List;
 

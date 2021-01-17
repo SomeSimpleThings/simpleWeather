@@ -1,10 +1,4 @@
-package com.geekbrains.simpleweather;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.geekbrains.simpleweather.ui;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -14,6 +8,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.geekbrains.simpleweather.R;
+import com.geekbrains.simpleweather.ui.search.SearchActivity;
+import com.geekbrains.simpleweather.ui.settings.SettingsActivity;
 import com.google.android.material.bottomappbar.BottomAppBar;
 
 import java.util.ArrayList;
