@@ -1,6 +1,5 @@
 package com.geekbrains.simpleweather.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,14 +8,19 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.geekbrains.simpleweather.R;
+import com.geekbrains.simpleweather.ui.search.SearchFragment;
 import com.geekbrains.simpleweather.ui.settings.SettingsActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
+
 public class BottomDrawerFragment extends BottomSheetDialogFragment {
 
+
+    public static final String BACKSTACK_KEY = "back_stack_key";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -36,18 +40,28 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
     private void processNavigation(NavigationView drawerNavigation) {
         drawerNavigation.setNavigationItemSelectedListener(menuItem -> {
             if (menuItem.getItemId() == R.id.search_menu_drawer) {
-                Activity activity = getActivity();
-                if (activity != null) ((MainActivity) activity).startSearchActivity();
-                this.dismiss();
-                return true;
+                showSearchFragment();
             } else if (menuItem.getItemId() == R.id.settings_menu_drawer) {
-                Intent settingsIntent = new Intent(getActivity(),
-                        SettingsActivity.class);
-                startActivity(settingsIntent);
-                this.dismiss();
-                return true;
+                startSettingsActivity();
             }
+            this.dismiss();
             return true;
         });
+    }
+
+    private void startSettingsActivity() {
+        Intent settingsIntent = new Intent(getActivity(),
+                SettingsActivity.class);
+        startActivity(settingsIntent);
+    }
+
+    private void showSearchFragment() {
+        SearchFragment currentCityFragment = SearchFragment.newInstance();
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, currentCityFragment)
+                .addToBackStack(BACKSTACK_KEY)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
     }
 }

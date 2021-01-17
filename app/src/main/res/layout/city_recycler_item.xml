@@ -11,6 +11,7 @@
         android:id="@+id/tv_city_recycler_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_12"
         android:layout_weight="1"
         android:text="@string/city_default"
         android:textSize="20sp">
@@ -18,18 +19,19 @@
     </TextView>
 
     <TextView
-        android:id="@+id/tv_country_recycler_item"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="@string/country_default"
-        android:textSize="20sp" />
-
-    <TextView
         android:id="@+id/tv_current_temp_recycler_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_margin="@dimen/margin_12"
+        android:layout_weight="2"
         android:text="@string/temp_default"
         android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_6"
+        android:layout_weight="2"
+        android:contentDescription="@string/day_weather_pic"
+        android:src="@drawable/ic_weather_sunny_day" />
 </LinearLayout>

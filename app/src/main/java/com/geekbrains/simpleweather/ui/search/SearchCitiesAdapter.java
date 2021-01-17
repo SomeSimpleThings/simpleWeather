@@ -10,19 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
+import com.geekbrains.simpleweather.data.City;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
-    private final List<String> cities;
+    private List<City> cities;
     private final OnItemClickListener itemClickListener;
 
-    SearchCitiesAdapter(Context context, List<String> cities, OnItemClickListener listener) {
-        this.cities = cities;
+    SearchCitiesAdapter(Context context, OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.itemClickListener = listener;
+        this.cities = new ArrayList<>();
     }
 
     @NonNull
@@ -34,7 +36,7 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String city = cities.get(position);
+        City city = cities.get(position);
         holder.bind(city, itemClickListener);
     }
 
@@ -45,20 +47,28 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView cityView;
+        TextView cityNameView;
+        TextView cityDayWeather;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cityView = itemView.findViewById(R.id.tv_city_recycler_item);
+            cityNameView = itemView.findViewById(R.id.tv_city_recycler_item);
+            cityDayWeather = itemView.findViewById(R.id.tv_current_temp_recycler_item);
         }
 
-        public void bind(String city, OnItemClickListener itemClickListener) {
-            cityView.setText(city);
+        public void bind(City city, OnItemClickListener itemClickListener) {
+            cityNameView.setText(city.getCityName());
+            cityDayWeather.setText(String.valueOf(city.getCurrentTempDay()));
             itemView.setOnClickListener(v -> itemClickListener.onItemClicked(city));
         }
     }
 
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+        notifyDataSetChanged();
+    }
+
     interface OnItemClickListener {
-        void onItemClicked(String city);
+        void onItemClicked(City city);
     }
 }
