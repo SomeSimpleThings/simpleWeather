@@ -1,5 +1,6 @@
 package com.geekbrains.simpleweather;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +13,10 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import static com.geekbrains.simpleweather.MainActivity.REQ_CODE_SELECT_CITY;
+
 public class BottomDrawerFragment extends BottomSheetDialogFragment {
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -30,8 +34,8 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
 
         drawerNavigation.setNavigationItemSelectedListener(menuItem -> {
             if (menuItem.getItemId() == R.id.search_menu_drawer) {
-                Intent intent = new Intent(getContext(), SearchActivity.class);
-                startActivity(intent);
+                Activity activity = getActivity();
+                if (activity != null) ((MainActivity) activity).startSearchActivity();
                 return true;
             }
             return true;
