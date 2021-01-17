@@ -22,4 +22,6 @@
     <string name="prefs_version_title">Версия</string>
     <string name="favourite">Избранное</string>
     <string name="country_default">Страна</string>
+    <string name="sign_in_username">Sign in</string>
+    <string name="sign_in_email">signedin@email.com</string>
 </resources>

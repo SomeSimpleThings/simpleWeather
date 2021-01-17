@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
 import com.geekbrains.simpleweather.ui.search.SearchActivity;
-import com.geekbrains.simpleweather.ui.settings.SettingsActivity;
 import com.google.android.material.bottomappbar.BottomAppBar;
 
 import java.util.ArrayList;
@@ -61,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 showBottomDrawer();
                 return true;
-            case R.id.settings_menu_drawer:
-                showSettingsActivity();
-                return true;
             case R.id.info_menu_drawer:
                 openCityInfo();
                 return true;
@@ -79,12 +75,6 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
-    }
-
-    private void showSettingsActivity() {
-        Intent settingsIntent = new Intent(this,
-                SettingsActivity.class);
-        startActivity(settingsIntent);
     }
 
     private void showBottomDrawer() {

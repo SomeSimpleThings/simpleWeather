@@ -12,10 +12,5 @@
             android:icon="@drawable/ic_baseline_star_border_24"
             android:title="@string/favourite"
             app:showAsAction="ifRoom" />
-        <item
-            android:id="@+id/settings_menu_drawer"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/settings"
-            app:showAsAction="ifRoom" />
     </group>
 </menu>
