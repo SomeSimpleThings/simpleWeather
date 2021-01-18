@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleWeather">
-        <activity android:name=".ui.search.SearchActivity"></activity>
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />

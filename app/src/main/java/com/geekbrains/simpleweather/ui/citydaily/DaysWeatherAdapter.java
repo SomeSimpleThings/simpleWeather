@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather.ui;
+package com.geekbrains.simpleweather.ui.citydaily;
 
 import android.content.Context;
 import android.view.LayoutInflater;
