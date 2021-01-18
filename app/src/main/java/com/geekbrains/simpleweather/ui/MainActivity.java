@@ -17,8 +17,6 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int REQ_CODE_SELECT_CITY = 42;
-    public static final String CITY_KEY = "selected_city_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
