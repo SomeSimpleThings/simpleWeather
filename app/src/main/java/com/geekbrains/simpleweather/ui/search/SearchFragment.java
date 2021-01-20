@@ -11,8 +11,10 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,6 +64,13 @@ public class SearchFragment extends Fragment implements SearchCitiesAdapter.OnIt
         adapter = new SearchCitiesAdapter(getContext(), this);
         viewModel.getFavouriteCities().observe(requireActivity(), adapter::setCities);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        DividerItemDecoration decoration =
+                new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(
+                ResourcesCompat.getDrawable(getResources(),
+                        R.drawable.recycler_divider,
+                        null));
+        recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
     }
 

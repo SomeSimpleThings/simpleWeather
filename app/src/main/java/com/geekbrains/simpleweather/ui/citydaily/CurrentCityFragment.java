@@ -3,6 +3,7 @@ package com.geekbrains.simpleweather.ui.citydaily;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,12 +80,24 @@ public class CurrentCityFragment extends Fragment {
     }
 
     private void updateCityWeatherCard(@NonNull View view, City city) {
+        Resources res = getResources();
         TextView textViewCity = view.findViewById(R.id.tv_city);
         TextView textViewTempDay = view.findViewById(R.id.tv_temp_day);
         TextView textViewTempNight = view.findViewById(R.id.tv_temp_night);
+        TextView textViewWindSpeed = view.findViewById(R.id.tv_wind_speed);
+        TextView textViewWindDirection = view.findViewById(R.id.tv_wind_direction);
+        TextView textViewHumidity = view.findViewById(R.id.tv_humidity);
+        TextView textViewPressure = view.findViewById(R.id.tv_pressure);
         textViewCity.setText(city.getCityName());
-        textViewTempDay.setText(String.valueOf(city.getCurrentTempDay()));
-        textViewTempNight.setText(String.valueOf(city.getCurrentTempNight()));
+        textViewTempDay.setText(res.getString(R.string.temp_default,
+                city.getCurrentWeather().getCurrentTempDay()));
+        textViewTempNight.setText(getString(R.string.temp_default,
+                city.getCurrentWeather().getCurrentTempNight()));
+        textViewWindSpeed.setText(String.valueOf(city.getCurrentWeather().getWindSpeed()));
+        textViewWindDirection.setText(String.valueOf(city.getCurrentWeather().getWindDirection()));
+        textViewHumidity.setText(res.getString(R.string.humidity_default,
+                city.getCurrentWeather().getHumidity()));
+        textViewPressure.setText(String.valueOf(city.getCurrentWeather().getPressure()));
     }
 
     private void setupRecyclerView(@NonNull View view) {
@@ -91,6 +106,13 @@ public class CurrentCityFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_daily);
         DaysWeatherAdapter adapter = new DaysWeatherAdapter(getActivity(), days);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        DividerItemDecoration decoration =
+                new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(
+                ResourcesCompat.getDrawable(getResources(),
+                        R.drawable.recycler_divider,
+                        null));
+        recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
     }
 

@@ -4,17 +4,15 @@ import java.io.Serializable;
 
 public class City implements Serializable {
     private String cityName;
-    private int currentTempDay;
-    private int currentTempNight;
+    private WeatherInfo currentWeather;
 
     public City(String cityName) {
         this.cityName = cityName;
     }
 
-    public City(String cityName, int tempDay, int tempNight) {
+    public City(String cityName, WeatherInfo weatherInfo) {
         this.cityName = cityName;
-        this.currentTempDay = tempDay;
-        this.currentTempNight = tempNight;
+        this.currentWeather = weatherInfo;
     }
 
     public String getCityName() {
@@ -25,19 +23,11 @@ public class City implements Serializable {
         this.cityName = cityName;
     }
 
-    public int getCurrentTempDay() {
-        return currentTempDay;
+    public WeatherInfo getCurrentWeather() {
+        return currentWeather;
     }
 
-    public void setCurrentTempDay(int currentTempDay) {
-        this.currentTempDay = currentTempDay;
-    }
-
-    public int getCurrentTempNight() {
-        return currentTempNight;
-    }
-
-    public void setCurrentTempNight(int currentTempNight) {
-        this.currentTempNight = currentTempNight;
+    public void setCurrentWeather(WeatherInfo currentWeather) {
+        this.currentWeather = currentWeather;
     }
 }

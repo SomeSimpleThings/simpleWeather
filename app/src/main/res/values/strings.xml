@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Simple weather</string>
-    <string name="temp_default" translatable="false">30°</string>
+    <string name="temp_default" translatable="false">%1$d°</string>
+    <string name="temp_default_shown" translatable="false">30°</string>
     <string name="day_weather_pic" translatable="false">day weather pic</string>
-    <string name="temp_default_night" translatable="false">15°</string>
     <string name="city_default">Moscow</string>
     <string name="wind_default_speed">5</string>
     <string name="wind_default_direction">SE</string>
-    <string name="humidity_default" translatable="false">70%</string>
+    <string name="humidity_default" translatable="false">%1$d</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -34,5 +34,6 @@
     <string name="sign_in_username">Username</string>
     <string name="sign_in_email">signedin@email.com</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pressure_default" translatable="false">750</string>
+    <string name="humidity_default_shown">75</string>
 </resources>
