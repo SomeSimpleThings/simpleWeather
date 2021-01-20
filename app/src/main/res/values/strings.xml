@@ -6,7 +6,9 @@
     <string name="city_default">Moscow</string>
     <string name="wind_default_speed">5</string>
     <string name="wind_default_direction">SE</string>
-    <string name="humidity_default" translatable="false">%1$d</string>
+    <string name="humidity_default" translatable="false">%d%%</string>
+    <string name="humidity_default_shown" translatable="false">75%</string>
+
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -35,5 +37,4 @@
     <string name="sign_in_email">signedin@email.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="pressure_default" translatable="false">750</string>
-    <string name="humidity_default_shown">75</string>
 </resources>
