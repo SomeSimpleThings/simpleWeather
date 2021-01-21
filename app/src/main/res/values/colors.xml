@@ -9,4 +9,5 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="iconWeatherColor">#1D1D1B</color>
+    <color name="decoratorColor">#6FC5EC</color>
 </resources>

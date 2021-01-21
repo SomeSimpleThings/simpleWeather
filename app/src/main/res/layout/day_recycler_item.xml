@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_12"
-            android:text="@string/temp_default"
+            android:text="@string/temp_default_shown"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/iv_day_weather_recycler_item"
             app:layout_constraintRight_toLeftOf="@id/tv_temp_night_recycler_item"
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_12"
-            android:text="@string/temp_default_night"
+            android:text="@string/temp_default_shown"
             app:layout_constraintLeft_toRightOf="@id/tv_temp_day_recycler_item"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_day_of_week_recycler_item">

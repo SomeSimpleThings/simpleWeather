@@ -15,6 +15,9 @@ public class CityViewModel extends ViewModel {
     List<City> cities = new ArrayList<>();
     private MutableLiveData<List<City>> favouriteCities;
 
+    WeatherInfo weatherInfo1 = new WeatherInfo(20, 15, 75, WindDirection.N, 4, 760);
+    WeatherInfo weatherInfo2 = new WeatherInfo(13, 8, 90, WindDirection.SE, 7, 740);
+
     public void selectCity(City item) {
         selectedCity.setValue(item);
     }
@@ -35,21 +38,21 @@ public class CityViewModel extends ViewModel {
         Handler myHandler = new Handler();
         myHandler.postDelayed(() -> {
             populate();
-            long seed = System.nanoTime();
             favouriteCities.setValue(cities);
         }, 1000);
     }
 
     private void populate() {
-        cities.add(new City("Владимир", 20, 15));
-        cities.add(new City("Петропавловск Камчатский", 15, 8));
-        cities.add(new City("Москва", 25, 10));
-        cities.add(new City("Санкт Петербург", 25, 10));
-        cities.add(new City("Иваново", 18, 9));
+
+        cities.add(new City("Владимир", weatherInfo1));
+        cities.add(new City("Петропавловск Камчатский", weatherInfo1));
+        cities.add(new City("Москва", weatherInfo2));
+        cities.add(new City("Санкт Петербург", weatherInfo2));
+        cities.add(new City("Иваново", weatherInfo2));
     }
 
     public void addCity(String text) {
-        cities.add(new City(text, 20, 10));
+        cities.add(new City(text, weatherInfo2));
         favouriteCities.postValue(cities);
     }
 }

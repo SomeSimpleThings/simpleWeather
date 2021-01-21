@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/daycard_item_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_rounded"
+    app:layoutDescription="@xml/activity_main_scene">
+
+    <ImageView
+        android:id="@+id/image_day_weather"
+        android:layout_width="@dimen/weather_icon_size"
+        android:layout_height="@dimen/weather_icon_size"
+        android:layout_margin="@dimen/margin_24"
+        android:contentDescription="@string/day_weather_pic"
+        android:src="@drawable/ic_weather_sunny_day"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/half_card_guide_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/icon_temp"
+        android:layout_width="@dimen/weather_icon_size_small"
+        android:layout_height="@dimen/weather_icon_size_small"
+        android:layout_marginStart="@dimen/margin_12"
+        android:contentDescription="@string/day_weather_pic"
+        android:src="@drawable/ic_weather_temp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_day_weather">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_temp_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6"
+        android:text="@string/temp_default_shown"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_temp"
+        app:layout_constraintTop_toBottomOf="@+id/image_day_weather">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_temp_night"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6"
+        android:text="@string/temp_default_shown"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/half_card_guide_line"
+        app:layout_constraintStart_toEndOf="@id/tv_temp_day"
+        app:layout_constraintTop_toBottomOf="@+id/image_day_weather">
+
+    </TextView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/half_card_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <TextView
+        android:id="@+id/tv_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city_default"
+        android:textSize="@dimen/large_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/half_card_guide_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/icon_wind"
+        android:layout_width="@dimen/weather_icon_size_small"
+        android:layout_height="@dimen/weather_icon_size_small"
+        android:layout_marginStart="@dimen/margin_24"
+        android:contentDescription="@string/day_weather_pic"
+        android:src="@drawable/ic_weather_wind"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/half_card_guide_line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_wind_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6"
+        android:text="@string/wind_default_speed"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/icon_wind"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/icon_compass"
+        android:layout_width="@dimen/weather_icon_size_small"
+        android:layout_height="@dimen/weather_icon_size_small"
+        android:layout_marginStart="@dimen/margin_12"
+        android:contentDescription="@string/day_weather_pic"
+        android:src="@drawable/ic_weather_compass"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_wind_speed"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_wind_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6"
+        android:layout_marginEnd="@dimen/margin_24"
+        android:text="@string/wind_default_direction"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icon_compass"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/icon_humidity"
+        android:layout_width="@dimen/weather_icon_size_small"
+        android:layout_height="@dimen/weather_icon_size_small"
+        android:layout_marginStart="@dimen/margin_24"
+        android:contentDescription="@string/day_weather_pic"
+        android:src="@drawable/ic_weather_drop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/half_card_guide_line"
+        app:layout_constraintTop_toBottomOf="@+id/icon_wind">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6"
+        android:text="@string/humidity_default_shown"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icon_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wind_speed">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/icon_pressure"
+        android:layout_width="@dimen/weather_icon_size_small"
+        android:layout_height="@dimen/weather_icon_size_small"
+        android:layout_marginStart="@dimen/margin_6"
+        android:contentDescription="@string/day_weather_pic"
+        android:src="@drawable/ic_weather_press"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/icon_wind">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6"
+        android:text="@string/pressure_default"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icon_pressure"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wind_speed">
+
+    </TextView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
