@@ -6,8 +6,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,10 +90,12 @@ public class SearchFragment extends Fragment implements SearchCitiesAdapter.OnIt
     }
 
     private void setupButton(View view) {
-        ImageButton searchButton = view.findViewById(R.id.search_button);
+        Button searchButton = view.findViewById(R.id.search_button);
         searchButton.setOnClickListener(v -> {
             String text = editText.getText().toString();
-            viewModel.addCity(text);
+            if (text != null && !text.equals(""))
+                viewModel.addCity(text);
+            editText.setText("");
         });
     }
 
