@@ -22,8 +22,9 @@
     <string name="prefs_version_title">Версия</string>
     <string name="favourite">Избранное</string>
     <string name="country_default">Страна</string>
-    <string name="sign_in_username">Sign in</string>
+    <string name="sign_in_username">Пользователь</string>
     <string name="sign_in_email">signedin@email.com</string>
-    <string name="undo_delete_text">Undo delete</string>
-    <string name="snack_bar_undo">undo</string>
+    <string name="undo_delete_text">Удалено</string>
+    <string name="snack_bar_undo">Отмена</string>
+    <string name="about">О приложении</string>
 </resources>

@@ -11,20 +11,7 @@
 
     <PreferenceCategory android:title="@string/pref_about">
 
-        <PreferenceScreen
-            android:key="developer"
-            android:summary="@string/prefs_developer"
-            android:title="@string/prefs_developer_title" />
 
-        <PreferenceScreen
-            android:key="github_link"
-            android:summary="@string/prefs_ghub_link"
-            android:title="@string/prefs_ghub" />
-
-        <PreferenceScreen
-            android:key="version"
-            android:summary="1.0"
-            android:title="@string/prefs_version_title" />
 
     </PreferenceCategory>
 
