@@ -18,13 +18,18 @@ import java.util.List;
 public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
-    private List<City> cities;
+    private List<City> cityList;
     private final OnItemClickListener itemClickListener;
+    private final OnItemRemovedListener itemRemovedListener;
+    private int deletedPosition;
 
-    SearchCitiesAdapter(Context context, OnItemClickListener listener) {
+    SearchCitiesAdapter(Context context,
+                        OnItemClickListener clickListener,
+                        OnItemRemovedListener removedListener) {
         this.inflater = LayoutInflater.from(context);
-        this.itemClickListener = listener;
-        this.cities = new ArrayList<>();
+        this.itemClickListener = clickListener;
+        this.itemRemovedListener = removedListener;
+        this.cityList = new ArrayList<>();
     }
 
     @NonNull
@@ -36,13 +41,28 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        City city = cities.get(position);
+        City city = cityList.get(position);
         holder.bind(city, itemClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return cities.size();
+        return cityList.size();
+    }
+
+
+    public void deleteItem(int adapterPosition) {
+        City deletedCity = cityList.get(adapterPosition);
+        deletedPosition = adapterPosition;
+        cityList.remove(adapterPosition);
+        notifyItemRemoved(adapterPosition);
+        itemRemovedListener.onItemRemoved(deletedCity);
+    }
+
+    public void addItem(City city) {
+        cityList.add(deletedPosition,
+                city);
+        notifyItemInserted(deletedPosition);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,12 +83,16 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
         }
     }
 
-    public void setCities(List<City> cities) {
-        this.cities = cities;
+    public void setCityList(List<City> cityList) {
+        this.cityList = cityList;
         notifyDataSetChanged();
     }
 
     interface OnItemClickListener {
         void onItemClicked(City city);
+    }
+
+    interface OnItemRemovedListener {
+        void onItemRemoved(City city);
     }
 }

@@ -15,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +23,11 @@ import com.geekbrains.simpleweather.R;
 import com.geekbrains.simpleweather.data.City;
 import com.geekbrains.simpleweather.data.CityViewModel;
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.snackbar.Snackbar;
 
-public class SearchFragment extends Fragment implements SearchCitiesAdapter.OnItemClickListener {
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
+
+public class SearchFragment extends Fragment {
 
     private EditText editText;
     private SearchCitiesAdapter adapter;
@@ -61,8 +65,8 @@ public class SearchFragment extends Fragment implements SearchCitiesAdapter.OnIt
 
     private void setupRecylerView(@NonNull View view, CityViewModel viewModel) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_cities);
-        adapter = new SearchCitiesAdapter(getContext(), this);
-        viewModel.getFavouriteCities().observe(requireActivity(), adapter::setCities);
+        adapter = new SearchCitiesAdapter(getContext(), this::onItemClicked, this::onItemRemoved);
+        viewModel.getFavouriteCities().observe(requireActivity(), adapter::setCityList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration decoration =
                 new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
@@ -72,6 +76,9 @@ public class SearchFragment extends Fragment implements SearchCitiesAdapter.OnIt
                         null));
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -82,11 +89,6 @@ public class SearchFragment extends Fragment implements SearchCitiesAdapter.OnIt
         bar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         bar.setHideOnScroll(true);
         bar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     private void setupButton(View view) {
@@ -102,5 +104,17 @@ public class SearchFragment extends Fragment implements SearchCitiesAdapter.OnIt
     public void onItemClicked(City city) {
         viewModel.selectCity(city);
         getActivity().onBackPressed();
+    }
+
+    public void onItemRemoved(City city) {
+        showUndoSnackbar(city);
+    }
+
+    private void showUndoSnackbar(City city) {
+        Snackbar snackbar = Snackbar.make(getView(), R.string.undo_delete_text,
+                LENGTH_LONG);
+        snackbar.setAnchorView(R.id.bottom_app_bar);
+        snackbar.setAction(R.string.snack_bar_undo, v -> adapter.addItem(city));
+        snackbar.show();
     }
 }

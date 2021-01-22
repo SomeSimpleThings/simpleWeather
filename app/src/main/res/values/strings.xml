@@ -37,4 +37,6 @@
     <string name="sign_in_email">signedin@email.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="pressure_default" translatable="false">750</string>
+    <string name="undo_delete_text">Undo delete</string>
+    <string name="snack_bar_undo">undo</string>
 </resources>
