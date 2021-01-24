@@ -87,9 +87,9 @@
         android:layout_width="@dimen/weather_icon_size_small"
         android:layout_height="@dimen/weather_icon_size_small"
         android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_24"
         android:contentDescription="@string/day_weather_pic"
         android:src="@drawable/ic_weather_wind"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/half_card_guide_line"
         app:layout_constraintTop_toBottomOf="@+id/tv_city">
 
@@ -100,9 +100,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_6"
+        android:layout_marginTop="@dimen/margin_24"
         android:text="@string/wind_default_speed"
         android:textSize="@dimen/default_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/icon_wind"
         app:layout_constraintTop_toBottomOf="@+id/tv_city">
 
@@ -113,9 +113,9 @@
         android:layout_width="@dimen/weather_icon_size_small"
         android:layout_height="@dimen/weather_icon_size_small"
         android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_24"
         android:contentDescription="@string/day_weather_pic"
         android:src="@drawable/ic_weather_compass"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_wind_speed"
         app:layout_constraintTop_toBottomOf="@+id/tv_city">
 
@@ -126,10 +126,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_6"
+        android:layout_marginTop="@dimen/margin_24"
         android:layout_marginEnd="@dimen/margin_24"
         android:text="@string/wind_default_direction"
         android:textSize="@dimen/default_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon_compass"
         app:layout_constraintTop_toBottomOf="@+id/tv_city">
 
@@ -142,7 +142,6 @@
         android:layout_marginStart="@dimen/margin_24"
         android:contentDescription="@string/day_weather_pic"
         android:src="@drawable/ic_weather_drop"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/half_card_guide_line"
         app:layout_constraintTop_toBottomOf="@+id/icon_wind">
 
@@ -155,7 +154,6 @@
         android:layout_marginStart="@dimen/margin_6"
         android:text="@string/humidity_default_shown"
         android:textSize="@dimen/default_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon_humidity"
         app:layout_constraintTop_toBottomOf="@+id/tv_wind_speed">
 
@@ -168,7 +166,6 @@
         android:layout_marginStart="@dimen/margin_6"
         android:contentDescription="@string/day_weather_pic"
         android:src="@drawable/ic_weather_press"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_humidity"
         app:layout_constraintTop_toBottomOf="@+id/icon_wind">
 
@@ -181,7 +178,6 @@
         android:layout_marginStart="@dimen/margin_6"
         android:text="@string/pressure_default"
         android:textSize="@dimen/default_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon_pressure"
         app:layout_constraintTop_toBottomOf="@+id/tv_wind_speed">
 

@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import com.geekbrains.simpleweather.R;
 import com.geekbrains.simpleweather.ui.citydaily.CurrentCityFragment;
 import com.geekbrains.simpleweather.ui.search.SearchFragment;
-import com.google.android.material.bottomappbar.BottomAppBar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomAppBar bar = findViewById(R.id.bottom_app_bar);
-        setSupportActionBar(bar);
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()

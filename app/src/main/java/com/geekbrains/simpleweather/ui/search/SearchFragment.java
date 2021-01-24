@@ -22,7 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.geekbrains.simpleweather.R;
 import com.geekbrains.simpleweather.data.City;
 import com.geekbrains.simpleweather.data.CityViewModel;
-import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
@@ -52,6 +53,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
+
     }
 
     @Override
@@ -61,6 +63,16 @@ public class SearchFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(CityViewModel.class);
         setupRecylerView(view, viewModel);
         editText = view.findViewById(R.id.edit_text_city_user_input);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(v -> getActivity().onBackPressed());
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        BottomNavigationView bar = getActivity().findViewById(R.id.bottom_nav);
+        bar.setVisibility(View.GONE);
     }
 
     private void setupRecylerView(@NonNull View view, CityViewModel viewModel) {
@@ -85,10 +97,6 @@ public class SearchFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.search_fragment_menu, menu);
-        BottomAppBar bar = getActivity().findViewById(R.id.bottom_app_bar);
-        bar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
-        bar.setHideOnScroll(true);
-        bar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
     }
 
     private void setupButton(View view) {
@@ -113,7 +121,7 @@ public class SearchFragment extends Fragment {
     private void showUndoSnackbar(City city) {
         Snackbar snackbar = Snackbar.make(getView(), R.string.undo_delete_text,
                 LENGTH_LONG);
-        snackbar.setAnchorView(R.id.bottom_app_bar);
+        snackbar.setAnchorView(R.id.fab);
         snackbar.setAction(R.string.snack_bar_undo, v -> adapter.addItem(city));
         snackbar.show();
     }

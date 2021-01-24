@@ -16,10 +16,9 @@ import java.util.List;
 public class DaysWeatherAdapter extends RecyclerView.Adapter<DaysWeatherAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
-    private final List<String> days;
+    private List<String> days;
 
-    public DaysWeatherAdapter(Context context, List<String> days) {
-        this.days = days;
+    public DaysWeatherAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -36,9 +35,14 @@ public class DaysWeatherAdapter extends RecyclerView.Adapter<DaysWeatherAdapter.
         holder.dayOfWeek.setText(day);
     }
 
+    public void setDays(List<String> daysList) {
+        days = daysList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
-        return days.size();
+        return days == null ? 0 : days.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

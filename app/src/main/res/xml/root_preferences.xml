@@ -1,18 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="@string/appearence">
-
         <SwitchPreferenceCompat
             android:key="@string/pref_dark_theme"
             android:summary="@string/prefs_switch_dark_summary"
             android:title="@string/prefs_switch_dark_title" />
-
     </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/pref_about">
-
-
-
-    </PreferenceCategory>
-
 </PreferenceScreen>

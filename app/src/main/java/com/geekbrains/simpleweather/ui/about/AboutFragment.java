@@ -15,7 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.geekbrains.simpleweather.R;
-import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class AboutFragment extends Fragment {
 
@@ -44,15 +45,21 @@ public class AboutFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupButton(view);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(v -> getActivity().onBackPressed());
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        BottomNavigationView bar = getActivity().findViewById(R.id.bottom_nav);
+        bar.setVisibility(View.GONE);
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.search_fragment_menu, menu);
-        BottomAppBar bar = getActivity().findViewById(R.id.bottom_app_bar);
-        bar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
-        bar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
     }
 
     private void setupButton(View view) {
