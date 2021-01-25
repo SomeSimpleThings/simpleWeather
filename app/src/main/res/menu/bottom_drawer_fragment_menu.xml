@@ -9,6 +9,10 @@
             android:id="@+id/settings_menu_drawer"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="@string/settings" />
+        <item
+            android:id="@+id/about_menu_drawer"
+            android:icon="@drawable/ic_baseline_people_alt_24"
+            android:title="@string/about" />
     </group>
 
 </menu>

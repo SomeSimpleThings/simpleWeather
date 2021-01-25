@@ -30,11 +30,17 @@
     <string name="prefs_developer" translatable="false">Evgeny Antonov</string>
     <string name="prefs_ghub" translatable="false">Github</string>
     <string name="prefs_ghub_link" translatable="false">https://github.com/capevery/simpleWeather</string>
-    <string name="prefs_version_title">Version</string>
+    <string name="prefs_version_title">Version 1.0</string>
     <string name="favourite">Favourite</string>
     <string name="country_default">Country</string>
     <string name="sign_in_username">Username</string>
     <string name="sign_in_email">signedin@email.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="pressure_default" translatable="false">750</string>
+    <string name="undo_delete_text">Deleted</string>
+    <string name="snack_bar_undo">undo</string>
+    <string name="about">About</string>
+    <string name="fab" translatable="false">fab</string>
+    <string name="info">Info</string>
+    <string name="menu">Menu</string>
 </resources>

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
+        <item
+            android:id="@+id/getmenu_drawer"
+            android:icon="@drawable/ic_baseline_menu_24"
+            android:title="@string/menu" />
         <item
             android:id="@+id/info_menu_drawer"
             android:icon="@drawable/ic_baseline_info_24"
-            android:title="@string/favourite"
-            app:showAsAction="ifRoom" />
+            android:title="@string/info" />
         <item
             android:id="@+id/favourite_menu_drawer"
             android:icon="@drawable/ic_baseline_star_border_24"
-            android:title="@string/favourite"
-            app:showAsAction="ifRoom" />
+            android:title="@string/favourite" />
     </group>
 </menu>

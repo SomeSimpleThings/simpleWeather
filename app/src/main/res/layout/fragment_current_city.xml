@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:overScrollMode="always">
 
-    <LinearLayout
-        android:id="@+id/current_city_linear"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            layout="@layout/current_day_card"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/current_city_linear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5" />
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_daily"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:listitem="@layout/day_recycler_item" />
+            <include
+                android:id="@+id/current_day_card"
+                layout="@layout/current_day_card"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_height"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-</LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_daily"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/current_day_card"
+                tools:listitem="@layout/day_recycler_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

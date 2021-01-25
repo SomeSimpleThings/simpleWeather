@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.geekbrains.simpleweather.R;
+import com.geekbrains.simpleweather.ui.about.AboutFragment;
 import com.geekbrains.simpleweather.ui.search.SearchFragment;
 import com.geekbrains.simpleweather.ui.settings.SettingsActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -41,6 +42,8 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
         drawerNavigation.setNavigationItemSelectedListener(menuItem -> {
             if (menuItem.getItemId() == R.id.search_menu_drawer) {
                 showSearchFragment();
+            } else if (menuItem.getItemId() == R.id.about_menu_drawer) {
+                showAboutFragment();
             } else if (menuItem.getItemId() == R.id.settings_menu_drawer) {
                 startSettingsActivity();
             }
@@ -56,10 +59,21 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
     }
 
     private void showSearchFragment() {
-        SearchFragment currentCityFragment = SearchFragment.newInstance();
+        SearchFragment searchFragment = SearchFragment.newInstance();
         getParentFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, currentCityFragment)
+                .replace(R.id.fragment_container, searchFragment)
+                .addToBackStack(BACKSTACK_KEY)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+
+    private void showAboutFragment() {
+        AboutFragment aboutFragment = AboutFragment.newInstance();
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, aboutFragment)
                 .addToBackStack(BACKSTACK_KEY)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();

@@ -6,8 +6,8 @@
     <color name="secondaryColor">#ffc107</color>
     <color name="secondaryLightColor">#fff350</color>
     <color name="secondaryDarkColor">#c79100</color>
-    <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryTextColor">#302E2E</color>
     <color name="secondaryTextColor">#000000</color>
-    <color name="iconWeatherColor">#1D1D1B</color>
+    <color name="iconColor">#1D1D1B</color>
     <color name="decoratorColor">#6FC5EC</color>
 </resources>
