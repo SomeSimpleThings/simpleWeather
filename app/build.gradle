@@ -6,6 +6,14 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("api.keys").newDataInputStream())
+        def weatherApiKey = properties.getProperty("openweather_api", "")
+        it.buildConfigField "String", "OPENWEATHER_API_KEY", weatherApiKey
+    }
+
+
     defaultConfig {
         applicationId "com.geekbrains.simpleweather"
         minSdkVersion 21
@@ -36,6 +44,8 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.preference:preference:1.1.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
