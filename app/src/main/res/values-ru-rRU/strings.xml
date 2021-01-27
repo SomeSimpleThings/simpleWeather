@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Simple weather</string>
+    <string name="app_name">Simple weatherDescription</string>
     <string name="city_default">Москва</string>
     <string name="wind_default_speed">5</string>
     <string name="wind_default_direction">СВ</string>

@@ -23,9 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
-import com.geekbrains.simpleweather.data.City;
-import com.geekbrains.simpleweather.data.CityViewModel;
-import com.geekbrains.simpleweather.data.DaysViewModel;
+import com.geekbrains.simpleweather.model.City;
+import com.geekbrains.simpleweather.model.CityViewModel;
+import com.geekbrains.simpleweather.model.DaysViewModel;
 import com.geekbrains.simpleweather.ui.BottomDrawerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

@@ -20,11 +20,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
-import com.geekbrains.simpleweather.data.City;
-import com.geekbrains.simpleweather.data.CityViewModel;
+import com.geekbrains.simpleweather.api.WeatherRepository;
+import com.geekbrains.simpleweather.model.City;
+import com.geekbrains.simpleweather.model.CityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.io.IOException;
 
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
 
@@ -104,7 +107,14 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(v -> {
             String text = editText.getText().toString();
             if (text != null && !text.equals(""))
-                viewModel.addCity(text);
+                //viewModel.addCity(text);
+//                new Thread(() -> {
+                    try {
+                        new WeatherRepository().getWeatherForecast(text);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+//                }).start();
             editText.setText("");
         });
     }

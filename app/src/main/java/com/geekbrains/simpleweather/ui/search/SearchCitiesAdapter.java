@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
-import com.geekbrains.simpleweather.data.City;
+import com.geekbrains.simpleweather.model.City;
 
 import java.util.ArrayList;
 import java.util.List;

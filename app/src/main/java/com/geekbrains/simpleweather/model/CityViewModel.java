@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather.data;
+package com.geekbrains.simpleweather.model;
 
 import android.os.Handler;
 
