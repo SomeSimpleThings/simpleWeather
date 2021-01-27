@@ -5,8 +5,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WeatherForecastResponce implements Serializable {
+
+    private final static long serialVersionUID = 2177741907493334569L;
 
     @SerializedName("cod")
     @Expose
@@ -23,7 +27,6 @@ public class WeatherForecastResponce implements Serializable {
     @SerializedName("city")
     @Expose
     private City city;
-    private final static long serialVersionUID = 2177741907493334569L;
 
     public String getCod() {
         return cod;
@@ -53,12 +56,25 @@ public class WeatherForecastResponce implements Serializable {
         return weatherForecast;
     }
 
+    public List<WeatherForecast> getWeatherForecastDaily() {
+        List<WeatherForecast> weatherForecasts = new ArrayList<>();
+        for (WeatherForecast forecast : weatherForecast) {
+            if (forecast.getDtTxt().contains("12:00:00"))
+                weatherForecasts.add(forecast);
+        }
+        return weatherForecasts;
+    }
+
     public void setWeatherForecast(WeatherForecast[] weatherForecast) {
         this.weatherForecast = weatherForecast;
     }
 
     public City getCity() {
         return city;
+    }
+
+    public String getCityName() {
+        return city == null ? "" : city.getName();
     }
 
     public void setCity(City city) {

@@ -1,6 +1,8 @@
 
 package com.geekbrains.simpleweather.model.pojo;
 
+import android.text.format.DateFormat;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -47,6 +49,11 @@ public class WeatherForecast implements Serializable {
         return dt;
     }
 
+    public String getDtFormatted() {
+        return (DateFormat.format("dd.MM.yy", (long) dt * 1000)).toString();
+    }
+
+
     public void setDt(int dt) {
         this.dt = dt;
     }
@@ -61,6 +68,12 @@ public class WeatherForecast implements Serializable {
 
     public WeatherDescription[] getWeatherDescription() {
         return weatherDescription;
+    }
+
+    public String getWeatherDescriptionReadable() {
+        if (weatherDescription.length > 0)
+            return weatherDescription[0].getDescription();
+        return "";
     }
 
     public void setWeatherDescription(WeatherDescription[] weatherDescription) {

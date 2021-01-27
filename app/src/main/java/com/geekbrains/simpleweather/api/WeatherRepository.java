@@ -1,8 +1,5 @@
 package com.geekbrains.simpleweather.api;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import com.geekbrains.simpleweather.model.pojo.WeatherForecastResponce;
 import com.google.gson.Gson;
 
@@ -22,24 +19,22 @@ public class WeatherRepository {
     private static final int READ_TIMEOUT = 10000;
 
 
-    private final MutableLiveData<WeatherForecastResponce> weatherForecastResponceLiveData;
     private final ExecutorService executorService;
 
     public WeatherRepository() {
         executorService = Executors.newSingleThreadExecutor();
-        weatherForecastResponceLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<WeatherForecastResponce> getWeatherForecast(String city) {
+    public WeatherForecastResponce getWeatherForecast(String city) {
         Future<WeatherForecastResponce> responce = executorService.submit(() ->
                 getWeatherForecastResponce(city)
         );
         try {
-            weatherForecastResponceLiveData.postValue(responce.get());
+            return responce.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        return weatherForecastResponceLiveData;
+        return null;
     }
 
     private WeatherForecastResponce getWeatherForecastResponce(String city) {
@@ -68,12 +63,10 @@ public class WeatherRepository {
         } catch (IOException ignored) {
 
         } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return stringBuilder.toString();

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.geekbrains.simpleweather.R;
+import com.geekbrains.simpleweather.model.WeatherForecastViewModel;
 import com.geekbrains.simpleweather.ui.citydaily.CurrentCityFragment;
 import com.geekbrains.simpleweather.ui.search.SearchFragment;
 
@@ -20,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//// TODO: 27.01.21 replace with search by coordinates
+        WeatherForecastViewModel weatherForecastViewModel
+                = new ViewModelProvider(this).get(WeatherForecastViewModel.class);
+        weatherForecastViewModel.firstLaunchHack("Moscow");
+
         setContentView(R.layout.activity_main);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager

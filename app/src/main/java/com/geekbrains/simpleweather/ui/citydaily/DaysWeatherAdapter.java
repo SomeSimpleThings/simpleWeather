@@ -10,13 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
+import com.geekbrains.simpleweather.model.pojo.WeatherForecast;
 
 import java.util.List;
+import java.util.Locale;
 
 public class DaysWeatherAdapter extends RecyclerView.Adapter<DaysWeatherAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
-    private List<String> days;
+    private List<WeatherForecast> forecasts;
 
     public DaysWeatherAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
@@ -31,27 +33,39 @@ public class DaysWeatherAdapter extends RecyclerView.Adapter<DaysWeatherAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String day = days.get(position);
-        holder.dayOfWeek.setText(day);
+        WeatherForecast forecast = forecasts.get(position);
+        holder.setForecast(forecast);
     }
 
-    public void setDays(List<String> daysList) {
-        days = daysList;
+    public void setForecasts(List<WeatherForecast> weatherForecasts) {
+        forecasts = weatherForecasts;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return days == null ? 0 : days.size();
+        return forecasts == null ? 0 : forecasts.size();
     }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView dayOfWeek;
+        TextView dayofweekTextView;
+        TextView tempDayTextView;
+        TextView descriptinTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            dayOfWeek = itemView.findViewById(R.id.tv_day_of_week_recycler_item);
+            dayofweekTextView = itemView.findViewById(R.id.tv_day_of_week_recycler_item);
+            tempDayTextView = itemView.findViewById(R.id.tv_temp_day_recycler_item);
+            descriptinTextView = itemView.findViewById(R.id.tv_description_recycler_item);
+        }
+
+        public void setForecast(WeatherForecast forecast) {
+            dayofweekTextView.setText(forecast.getDtFormatted());
+            tempDayTextView.setText(String.format(Locale.getDefault(),
+                    "%1$.0f°", forecast.getWeather().getTemp()));
+            descriptinTextView.setText(String.valueOf(forecast.getWeatherDescriptionReadable()));
         }
     }
 }
