@@ -39,7 +39,7 @@ public class WeatherForecastViewModel extends ViewModel {
         dailyForecast.postValue(forecastResponce.getWeatherForecastDaily());
     }
 
-    public MutableLiveData<List<WeatherForecastResponce>> getWeatherForecastResponces() {
+    public MutableLiveData<List<WeatherForecastResponce>> getWeatherForecastResponses() {
         return data;
     }
 

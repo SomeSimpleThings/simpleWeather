@@ -6,12 +6,12 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
-//    buildTypes.each {
-//        Properties properties = new Properties()
-//        properties.load(project.rootProject.file("api.keys").newDataInputStream())
-//        def weatherApiKey = properties.getProperty("openweather_api", "")
-//        it.buildConfigField "String", "OPENWEATHER_API_KEY", weatherApiKey
-//    }
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("api.keys").newDataInputStream())
+        def weatherApiKey = properties.getProperty("openweather_api", "")
+        it.buildConfigField "String", "OPENWEATHER_API_KEY", weatherApiKey
+    }
 
 
     defaultConfig {

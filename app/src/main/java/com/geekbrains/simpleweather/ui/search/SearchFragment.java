@@ -80,7 +80,7 @@ public class SearchFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_cities);
         adapter = new SearchCitiesAdapter(getContext(), this::onItemClicked, this::onItemRemoved);
         viewModel = new ViewModelProvider(requireActivity()).get(WeatherForecastViewModel.class);
-        viewModel.getWeatherForecastResponces().observe(requireActivity(),
+        viewModel.getWeatherForecastResponses().observe(requireActivity(),
                 weatherForecastResponces -> adapter.setCityList(weatherForecastResponces));
         viewModel.getSelectedResponce().observe(requireActivity(), responce -> {
             if (responce == null) {
