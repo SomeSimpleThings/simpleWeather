@@ -20,11 +20,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
-import com.geekbrains.simpleweather.data.City;
-import com.geekbrains.simpleweather.data.CityViewModel;
+import com.geekbrains.simpleweather.model.WeatherForecastViewModel;
+import com.geekbrains.simpleweather.model.pojo.WeatherForecastResponce;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
 
@@ -32,7 +34,7 @@ public class SearchFragment extends Fragment {
 
     private EditText editText;
     private SearchCitiesAdapter adapter;
-    private CityViewModel viewModel;
+    private WeatherForecastViewModel viewModel;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -60,8 +62,7 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupButton(view);
-        viewModel = new ViewModelProvider(requireActivity()).get(CityViewModel.class);
-        setupRecylerView(view, viewModel);
+        setupRecylerView(view);
         editText = view.findViewById(R.id.edit_text_city_user_input);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(v -> getActivity().onBackPressed());
@@ -75,17 +76,23 @@ public class SearchFragment extends Fragment {
         bar.setVisibility(View.GONE);
     }
 
-    private void setupRecylerView(@NonNull View view, CityViewModel viewModel) {
+    private void setupRecylerView(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_cities);
         adapter = new SearchCitiesAdapter(getContext(), this::onItemClicked, this::onItemRemoved);
-        viewModel.getFavouriteCities().observe(requireActivity(), adapter::setCityList);
+        viewModel = new ViewModelProvider(requireActivity()).get(WeatherForecastViewModel.class);
+        viewModel.getWeatherForecastResponses().observe(requireActivity(),
+                weatherForecastResponces -> adapter.setCityList(weatherForecastResponces));
+        viewModel.getSelectedResponce().observe(requireActivity(), responce -> {
+            if (responce == null) {
+                showSnackIfError(view);
+            }
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration decoration =
                 new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-        decoration.setDrawable(
-                ResourcesCompat.getDrawable(getResources(),
-                        R.drawable.recycler_divider,
-                        null));
+        decoration.setDrawable(Objects.requireNonNull(ResourcesCompat.getDrawable(getResources(),
+                R.drawable.recycler_divider,
+                null)));
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new
@@ -103,26 +110,33 @@ public class SearchFragment extends Fragment {
         Button searchButton = view.findViewById(R.id.search_button);
         searchButton.setOnClickListener(v -> {
             String text = editText.getText().toString();
-            if (text != null && !text.equals(""))
-                viewModel.addCity(text);
+            if (!text.equals(""))
+                viewModel.postForecastSearch(text);
             editText.setText("");
         });
     }
 
-    public void onItemClicked(City city) {
-        viewModel.selectCity(city);
+    public void onItemClicked(WeatherForecastResponce responce) {
+        viewModel.selectCity(responce);
         getActivity().onBackPressed();
     }
 
-    public void onItemRemoved(City city) {
-        showUndoSnackbar(city);
+    public void onItemRemoved(WeatherForecastResponce responce) {
+        showUndoSnackbar(responce);
     }
 
-    private void showUndoSnackbar(City city) {
+    private void showUndoSnackbar(WeatherForecastResponce responce) {
         Snackbar snackbar = Snackbar.make(getView(), R.string.undo_delete_text,
                 LENGTH_LONG);
         snackbar.setAnchorView(R.id.fab);
-        snackbar.setAction(R.string.snack_bar_undo, v -> adapter.addItem(city));
+        snackbar.setAction(R.string.snack_bar_undo, v -> adapter.addItem(responce));
+        snackbar.show();
+    }
+
+    private void showSnackIfError(View view) {
+        Snackbar snackbar = Snackbar.make(view, R.string.city_not_found,
+                LENGTH_LONG);
+        snackbar.setAnchorView(R.id.fab);
         snackbar.show();
     }
 }

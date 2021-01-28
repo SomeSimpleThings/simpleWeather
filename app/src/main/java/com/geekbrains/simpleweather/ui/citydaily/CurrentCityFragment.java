@@ -3,7 +3,6 @@ package com.geekbrains.simpleweather.ui.citydaily;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,9 +22,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
-import com.geekbrains.simpleweather.data.City;
-import com.geekbrains.simpleweather.data.CityViewModel;
-import com.geekbrains.simpleweather.data.DaysViewModel;
+import com.geekbrains.simpleweather.model.WeatherForecastViewModel;
+import com.geekbrains.simpleweather.model.pojo.WeatherForecast;
+import com.geekbrains.simpleweather.model.pojo.WeatherForecastResponce;
 import com.geekbrains.simpleweather.ui.BottomDrawerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,6 +34,7 @@ public class CurrentCityFragment extends Fragment {
     private static final String TAG = "tagg";
 
     private TextView currentCity;
+    WeatherForecastViewModel weatherForecastViewModel;
 
     public CurrentCityFragment() {
         // Required empty public constructor
@@ -55,8 +55,8 @@ public class CurrentCityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_current_city, container, false);
-        DaysViewModel daysViewModel = new ViewModelProvider(requireActivity()).get(DaysViewModel.class);
-        setupRecyclerView(view, daysViewModel);
+        weatherForecastViewModel = new ViewModelProvider(requireActivity()).get(WeatherForecastViewModel.class);
+        setupRecyclerView(view);
         return view;
     }
 
@@ -73,8 +73,11 @@ public class CurrentCityFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CityViewModel cityViewModel = new ViewModelProvider(requireActivity()).get(CityViewModel.class);
-        cityViewModel.getSelectedCity().observe(getViewLifecycleOwner(), city -> updateCityWeatherCard(view, city));
+        weatherForecastViewModel.getSelectedResponce()
+                .observe(getViewLifecycleOwner(), responce -> {
+                    if (responce != null)
+                        updateCityWeatherCard(view, responce);
+                });
     }
 
     @Override
@@ -99,8 +102,7 @@ public class CurrentCityFragment extends Fragment {
         });
     }
 
-    private void updateCityWeatherCard(@NonNull View view, City city) {
-        Resources res = getResources();
+    private void updateCityWeatherCard(@NonNull View view, WeatherForecastResponce responce) {
         TextView textViewCity = view.findViewById(R.id.tv_city);
         TextView textViewTempDay = view.findViewById(R.id.tv_temp_day);
         TextView textViewTempNight = view.findViewById(R.id.tv_temp_night);
@@ -108,23 +110,28 @@ public class CurrentCityFragment extends Fragment {
         TextView textViewWindDirection = view.findViewById(R.id.tv_wind_direction);
         TextView textViewHumidity = view.findViewById(R.id.tv_humidity);
         TextView textViewPressure = view.findViewById(R.id.tv_pressure);
-        textViewCity.setText(city.getCityName());
-        textViewTempDay.setText(res.getString(R.string.temp_default,
-                city.getCurrentWeather().getCurrentTempDay()));
+
+        textViewCity.setText(responce.getCityName());
+        WeatherForecast weather = responce.getWeatherForecast()[0];
+        textViewTempDay.setText(getString(R.string.temp_default,
+                weather.getWeather().getTempMax()));
         textViewTempNight.setText(getString(R.string.temp_default,
-                city.getCurrentWeather().getCurrentTempNight()));
-        textViewWindSpeed.setText(String.valueOf(city.getCurrentWeather().getWindSpeed()));
-        textViewWindDirection.setText(String.valueOf(city.getCurrentWeather().getWindDirection()));
-        textViewHumidity.setText(res.getString(R.string.humidity_default,
-                city.getCurrentWeather().getHumidity()));
-        textViewPressure.setText(String.valueOf(city.getCurrentWeather().getPressure()));
+                weather.getWeather().getTempMin()));
+        textViewWindSpeed.setText(String.valueOf(weather.getWind().getSpeed()));
+        textViewWindDirection.setText(String.valueOf(weather.getWind().getDeg()));
+        textViewHumidity.setText(getString(R.string.humidity_default,
+                weather.getWeather().getHumidity()));
+        textViewPressure.setText(String.valueOf(weather.getWeather().getPressure()));
     }
 
-    private void setupRecyclerView(@NonNull View view, DaysViewModel viewModel) {
+    private void setupRecyclerView(@NonNull View view) {
 
         currentCity = view.findViewById(R.id.tv_city);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_daily);
         DaysWeatherAdapter adapter = new DaysWeatherAdapter(getActivity());
+        weatherForecastViewModel.getWeatherForecast()
+                .observe(getViewLifecycleOwner(), adapter::setForecasts);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration decoration =
                 new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
@@ -134,8 +141,6 @@ public class CurrentCityFragment extends Fragment {
                         null));
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
-        viewModel.getDays().observe(getViewLifecycleOwner(), adapter::setDays);
-//        ViewCompat.setNestedScrollingEnabled(recyclerView, false);
     }
 
     @Override

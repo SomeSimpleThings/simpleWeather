@@ -13,6 +13,7 @@
     <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_48">48dp</dimen>
+    <dimen name="margin_60">60dp</dimen>
 
     <dimen name="decorator_height">3dp</dimen>
 

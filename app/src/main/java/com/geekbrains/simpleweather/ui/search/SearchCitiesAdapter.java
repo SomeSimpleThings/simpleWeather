@@ -10,15 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.simpleweather.R;
-import com.geekbrains.simpleweather.data.City;
+import com.geekbrains.simpleweather.model.pojo.WeatherForecast;
+import com.geekbrains.simpleweather.model.pojo.WeatherForecastResponce;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
-    private List<City> cityList;
+    private List<WeatherForecastResponce> weatherForecastList;
     private final OnItemClickListener itemClickListener;
     private final OnItemRemovedListener itemRemovedListener;
     private int deletedPosition;
@@ -29,7 +31,8 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
         this.inflater = LayoutInflater.from(context);
         this.itemClickListener = clickListener;
         this.itemRemovedListener = removedListener;
-        this.cityList = new ArrayList<>();
+        this.weatherForecastList = new ArrayList<>();
+        this.deletedPosition = 0;
     }
 
     @NonNull
@@ -41,27 +44,27 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        City city = cityList.get(position);
+        WeatherForecastResponce city = weatherForecastList.get(position);
         holder.bind(city, itemClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return cityList.size();
+        return weatherForecastList.size();
     }
 
 
     public void deleteItem(int adapterPosition) {
-        City deletedCity = cityList.get(adapterPosition);
+        WeatherForecastResponce deleted = weatherForecastList.get(adapterPosition);
         deletedPosition = adapterPosition;
-        cityList.remove(adapterPosition);
+        weatherForecastList.remove(adapterPosition);
         notifyItemRemoved(adapterPosition);
-        itemRemovedListener.onItemRemoved(deletedCity);
+        itemRemovedListener.onItemRemoved(deleted);
     }
 
-    public void addItem(City city) {
-        cityList.add(deletedPosition,
-                city);
+    public void addItem(WeatherForecastResponce responce) {
+        weatherForecastList.add(deletedPosition,
+                responce);
         notifyItemInserted(deletedPosition);
     }
 
@@ -76,23 +79,30 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
             cityDayWeather = itemView.findViewById(R.id.tv_current_temp_recycler_item);
         }
 
-        public void bind(City city, OnItemClickListener itemClickListener) {
-            cityNameView.setText(city.getCityName());
-            cityDayWeather.setText(String.valueOf(city.getCurrentWeather().getCurrentTempDay()));
-            itemView.setOnClickListener(v -> itemClickListener.onItemClicked(city));
+        public void bind(WeatherForecastResponce weatherForecastResponce, OnItemClickListener itemClickListener) {
+            cityNameView.setText(weatherForecastResponce.getCityName());
+            if (weatherForecastResponce.getWeatherForecast() != null
+                    && weatherForecastResponce.getWeatherForecast().length != 0) {
+                WeatherForecast forecast = weatherForecastResponce.getWeatherForecast()[0];
+                if (forecast != null) {
+                    cityDayWeather.setText(String.format(Locale.getDefault(),
+                            "%1$.0f°", forecast.getWeather().getTemp()));
+                }
+            }
+            itemView.setOnClickListener(v -> itemClickListener.onItemClicked(weatherForecastResponce));
         }
     }
 
-    public void setCityList(List<City> cityList) {
-        this.cityList = cityList;
+    public void setCityList(List<WeatherForecastResponce> cityList) {
+        this.weatherForecastList = cityList;
         notifyDataSetChanged();
     }
 
     interface OnItemClickListener {
-        void onItemClicked(City city);
+        void onItemClicked(WeatherForecastResponce responce);
     }
 
     interface OnItemRemovedListener {
-        void onItemRemoved(City city);
+        void onItemRemoved(WeatherForecastResponce responce);
     }
 }

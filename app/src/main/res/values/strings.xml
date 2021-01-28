@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Simple weather</string>
-    <string name="temp_default" translatable="false">%1$d°</string>
+    <string name="temp_default" translatable="false">%1$.0f°</string>
     <string name="temp_default_shown" translatable="false">30°</string>
-    <string name="day_weather_pic" translatable="false">day weather pic</string>
+    <string name="day_weather_pic" translatable="false">day weatherDescription pic</string>
     <string name="city_default">Moscow</string>
     <string name="wind_default_speed">5</string>
     <string name="wind_default_direction">SE</string>
@@ -43,4 +43,6 @@
     <string name="fab" translatable="false">fab</string>
     <string name="info">Info</string>
     <string name="menu">Menu</string>
+    <string name="sunny">Sunny</string>
+    <string name="city_not_found">City not found</string>
 </resources>
