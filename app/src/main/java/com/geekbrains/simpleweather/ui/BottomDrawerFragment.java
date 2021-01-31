@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.geekbrains.simpleweather.R;
 import com.geekbrains.simpleweather.ui.about.AboutFragment;
+import com.geekbrains.simpleweather.ui.fastsearch.FastSearchFragment;
 import com.geekbrains.simpleweather.ui.settings.SettingsActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -52,6 +53,8 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
     }
 
     private void showFastSearchDialog() {
+        FastSearchFragment fastSearchFragment = FastSearchFragment.newInstance();
+        fastSearchFragment.show(getParentFragmentManager(), "dialogCustom");
     }
 
     private void startSettingsActivity() {

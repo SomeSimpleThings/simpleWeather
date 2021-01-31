@@ -2,6 +2,7 @@ package com.geekbrains.simpleweather.ui;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -47,5 +48,18 @@ public class MainActivity extends AppCompatActivity {
             currentFragment = CurrentCityFragment.newInstance();
         }
         return currentFragment;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.exit_confirm))
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.yes, (dialog, id) -> MainActivity.this.finish())
+                    .setNegativeButton(R.string.no, (dialog, id) -> dialog.cancel());
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else super.onBackPressed();
     }
 }
