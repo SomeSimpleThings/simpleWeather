@@ -18,6 +18,7 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String BACKSTACK_KEY = "back_stack_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

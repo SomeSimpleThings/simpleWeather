@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +27,10 @@ import com.geekbrains.simpleweather.model.WeatherForecastViewModel;
 import com.geekbrains.simpleweather.model.pojo.WeatherForecast;
 import com.geekbrains.simpleweather.model.pojo.WeatherForecastResponce;
 import com.geekbrains.simpleweather.ui.BottomDrawerFragment;
+import com.geekbrains.simpleweather.ui.search.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import static com.geekbrains.simpleweather.ui.MainActivity.BACKSTACK_KEY;
 
 
 public class CurrentCityFragment extends Fragment {
@@ -94,6 +98,10 @@ public class CurrentCityFragment extends Fragment {
                 openCityInfo();
                 return true;
             }
+            if (item.getItemId() == R.id.favourite_menu_drawer) {
+                showSearchFragment();
+                return true;
+            }
             if (item.getItemId() == android.R.id.home) {
                 showBottomDrawer();
                 return true;
@@ -152,6 +160,16 @@ public class CurrentCityFragment extends Fragment {
     private void showBottomDrawer() {
         BottomDrawerFragment bottomDrawerFragment = new BottomDrawerFragment();
         bottomDrawerFragment.show(getParentFragmentManager(), TAG);
+    }
+
+    private void showSearchFragment() {
+        SearchFragment searchFragment = SearchFragment.newInstance();
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, searchFragment)
+                .addToBackStack(BACKSTACK_KEY)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
     }
 
     private void openCityInfo() {

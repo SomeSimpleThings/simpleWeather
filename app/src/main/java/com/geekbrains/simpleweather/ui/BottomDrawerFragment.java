@@ -12,16 +12,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.geekbrains.simpleweather.R;
 import com.geekbrains.simpleweather.ui.about.AboutFragment;
-import com.geekbrains.simpleweather.ui.search.SearchFragment;
 import com.geekbrains.simpleweather.ui.settings.SettingsActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import static com.geekbrains.simpleweather.ui.MainActivity.BACKSTACK_KEY;
+
 
 public class BottomDrawerFragment extends BottomSheetDialogFragment {
 
-
-    public static final String BACKSTACK_KEY = "back_stack_key";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,7 +40,7 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
     private void processNavigation(NavigationView drawerNavigation) {
         drawerNavigation.setNavigationItemSelectedListener(menuItem -> {
             if (menuItem.getItemId() == R.id.search_menu_drawer) {
-                showSearchFragment();
+                showFastSearchDialog();
             } else if (menuItem.getItemId() == R.id.about_menu_drawer) {
                 showAboutFragment();
             } else if (menuItem.getItemId() == R.id.settings_menu_drawer) {
@@ -52,20 +51,13 @@ public class BottomDrawerFragment extends BottomSheetDialogFragment {
         });
     }
 
+    private void showFastSearchDialog() {
+    }
+
     private void startSettingsActivity() {
         Intent settingsIntent = new Intent(getActivity(),
                 SettingsActivity.class);
         startActivity(settingsIntent);
-    }
-
-    private void showSearchFragment() {
-        SearchFragment searchFragment = SearchFragment.newInstance();
-        getParentFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, searchFragment)
-                .addToBackStack(BACKSTACK_KEY)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit();
     }
 
 
