@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather.ui.search;
+package com.geekbrains.simpleweather.ui.favourites;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
-    private SearchCitiesAdapter mAdapter;
+    private FavouritesCitiesAdapter mAdapter;
 
-    public SwipeToDeleteCallback(SearchCitiesAdapter adapter) {
+    public SwipeToDeleteCallback(FavouritesCitiesAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.mAdapter = adapter;
     }

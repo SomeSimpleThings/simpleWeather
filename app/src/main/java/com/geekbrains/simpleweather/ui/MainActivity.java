@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.geekbrains.simpleweather.R;
 import com.geekbrains.simpleweather.model.WeatherForecastViewModel;
 import com.geekbrains.simpleweather.ui.citydaily.CurrentCityFragment;
-import com.geekbrains.simpleweather.ui.search.SearchFragment;
+import com.geekbrains.simpleweather.ui.favourites.FavouritesFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment currentFragment;
         Timber.d(String.valueOf(fragmentManager.getBackStackEntryCount()));
         if (fragmentManager.getBackStackEntryCount() > 0) {
-            currentFragment = SearchFragment.newInstance();
+            currentFragment = FavouritesFragment.newInstance();
         } else {
             currentFragment = CurrentCityFragment.newInstance();
         }

@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather.ui.search;
+package com.geekbrains.simpleweather.ui.favourites;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapter.ViewHolder> {
+public class FavouritesCitiesAdapter extends RecyclerView.Adapter<FavouritesCitiesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
     private List<WeatherForecastResponce> weatherForecastList;
@@ -25,9 +25,9 @@ public class SearchCitiesAdapter extends RecyclerView.Adapter<SearchCitiesAdapte
     private final OnItemRemovedListener itemRemovedListener;
     private int deletedPosition;
 
-    SearchCitiesAdapter(Context context,
-                        OnItemClickListener clickListener,
-                        OnItemRemovedListener removedListener) {
+    FavouritesCitiesAdapter(Context context,
+                            OnItemClickListener clickListener,
+                            OnItemRemovedListener removedListener) {
         this.inflater = LayoutInflater.from(context);
         this.itemClickListener = clickListener;
         this.itemRemovedListener = removedListener;

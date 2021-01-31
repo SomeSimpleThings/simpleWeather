@@ -1,4 +1,4 @@
-package com.geekbrains.simpleweather.ui.search;
+package com.geekbrains.simpleweather.ui.favourites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,18 +30,18 @@ import java.util.Objects;
 
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
 
-public class SearchFragment extends Fragment {
+public class FavouritesFragment extends Fragment {
 
     private EditText editText;
-    private SearchCitiesAdapter adapter;
+    private FavouritesCitiesAdapter adapter;
     private WeatherForecastViewModel viewModel;
 
-    public SearchFragment() {
+    public FavouritesFragment() {
         // Required empty public constructor
     }
 
-    public static SearchFragment newInstance() {
-        return new SearchFragment();
+    public static FavouritesFragment newInstance() {
+        return new FavouritesFragment();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_favourites, container, false);
 
     }
 
@@ -78,7 +78,7 @@ public class SearchFragment extends Fragment {
 
     private void setupRecylerView(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_cities);
-        adapter = new SearchCitiesAdapter(getContext(), this::onItemClicked, this::onItemRemoved);
+        adapter = new FavouritesCitiesAdapter(getContext(), this::onItemClicked, this::onItemRemoved);
         viewModel = new ViewModelProvider(requireActivity()).get(WeatherForecastViewModel.class);
         viewModel.getWeatherForecastResponses().observe(requireActivity(),
                 weatherForecastResponces -> adapter.setCityList(weatherForecastResponces));
@@ -103,7 +103,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_fragment_menu, menu);
+        inflater.inflate(R.menu.favourites_fragment_menu, menu);
     }
 
     private void setupButton(View view) {

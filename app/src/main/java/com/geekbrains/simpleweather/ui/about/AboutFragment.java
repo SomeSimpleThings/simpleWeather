@@ -59,7 +59,7 @@ public class AboutFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_fragment_menu, menu);
+        inflater.inflate(R.menu.favourites_fragment_menu, menu);
     }
 
     private void setupButton(View view) {

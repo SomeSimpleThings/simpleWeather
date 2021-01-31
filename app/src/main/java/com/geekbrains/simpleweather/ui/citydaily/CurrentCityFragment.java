@@ -27,7 +27,7 @@ import com.geekbrains.simpleweather.model.WeatherForecastViewModel;
 import com.geekbrains.simpleweather.model.pojo.WeatherForecast;
 import com.geekbrains.simpleweather.model.pojo.WeatherForecastResponce;
 import com.geekbrains.simpleweather.ui.BottomDrawerFragment;
-import com.geekbrains.simpleweather.ui.search.SearchFragment;
+import com.geekbrains.simpleweather.ui.favourites.FavouritesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static com.geekbrains.simpleweather.ui.MainActivity.BACKSTACK_KEY;
@@ -163,10 +163,10 @@ public class CurrentCityFragment extends Fragment {
     }
 
     private void showSearchFragment() {
-        SearchFragment searchFragment = SearchFragment.newInstance();
+        FavouritesFragment favouritesFragment = FavouritesFragment.newInstance();
         getParentFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, searchFragment)
+                .replace(R.id.fragment_container, favouritesFragment)
                 .addToBackStack(BACKSTACK_KEY)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
